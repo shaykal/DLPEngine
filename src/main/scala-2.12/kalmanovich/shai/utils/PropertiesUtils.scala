@@ -9,17 +9,19 @@ import scala.util.Try
   */
 object PropertiesUtils {
 
-  //lazy val serverHost: String = load(Consts.SERVER_HOST)
-  //lazy val serverPort: Int = load(Consts.SERVER_PORT).toInt
-  //lazy val maxTimeToWait: Int = load(Consts.MAX_TIME_TO_WAIT).toInt
+  lazy val rulesSsnKeywords: String = load(Consts.RULES_SSN_KEYWORDS)
+  lazy val rulesSsnIsActive: Boolean = load(Consts.RULES_SSN_IS_ACTIVE, "false").toBoolean
+  lazy val wordsDistance: Int = load(Consts.WORDS_DISTANCE).toInt
 
 
   /**
     * <i>load</i> - This method loads the properties from the applcation.conf file.
     * It can be controlled by VM property e.g. -Dconfig.file=src\test\resources\application-test.conf
+    * @param entry - The entry as it appears in the config file.
+    * @param default - the default value in case the entry doesn't exist in the config file.
     * @return - The string of the value of the property name.
     */
-  def load(entry: String): String = {
-    Try(ConfigFactory.load.getString(entry)).getOrElse(Consts.EMPTY_STRING)
+  def load(entry: String, default: String = ""): String = {
+    Try(ConfigFactory.load.getString(entry)).getOrElse(default)
   }
 }

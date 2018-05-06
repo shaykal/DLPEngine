@@ -1,6 +1,7 @@
 package kalmanovich.shai.model.Impl
 
 import kalmanovich.shai.model.SensitiveData
+import kalmanovich.shai.utils.PropertiesUtils
 
 import scala.util.matching.Regex
 
@@ -9,20 +10,18 @@ import scala.util.matching.Regex
   */
 object SSN extends SensitiveData {
 
+  override val name: String = "SSN"
+
   override def isCheckSum(input: String) =
     true // SSN doesn't have checksum, always return true
 
-  override implicit val patternList: List[Regex] = List(
-    """^[\d]{9}$""".r,
-    """^[\d]{3}-[\d]{2}-[\d]{4}$""".r,
-    """^[\d]{3} [\d]{2} [\d]{4}$""".r
+  override val patternList: List[Regex] = List(
+    """[\d]{9}""".r,
+    """[\d]{3}-[\d]{2}-[\d]{4}""".r,
+    """[\d]{3} [\d]{2} [\d]{4}""".r
   )
 
-  override val contextKeyWords: List[String] = Nil
+  override val contextKeyWords: List[String] = PropertiesUtils.rulesSsnKeywords.split(",").toList
 
-
-  def isMatch(input: String) : Boolean = {
-    super.isMatch(input)
-  }
-
+  override val isActive: Boolean = PropertiesUtils.rulesSsnIsActive
 }

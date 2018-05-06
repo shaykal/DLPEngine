@@ -13,7 +13,7 @@ class SensitiveDataTest extends FunSuite {
     val input: String = "1-2-3"
     val patternList: List[Regex] = List("""\d-\d-\d""".r)
 
-    val answer: Boolean = SensitiveDataObj.isMatch(input)(patternList)
+    val answer: Boolean = SensitiveDataObj.isMatch(input, patternList)
     assert(answer)
   }
 
@@ -21,7 +21,7 @@ class SensitiveDataTest extends FunSuite {
     val input: String = "1-2-3"
     val patternList: List[Regex] = List("""[A-Z]""".r, """\d-\d-\d""".r)
 
-    val answer: Boolean = SensitiveDataObj.isMatch(input)(patternList)
+    val answer: Boolean = SensitiveDataObj.isMatch(input, patternList)
     assert(answer)
   }
 
@@ -29,17 +29,18 @@ class SensitiveDataTest extends FunSuite {
     val input: String = "1-2-3"
     val patternList: List[Regex] = List("""[a-z]""".r, """[A-Z]""".r)
 
-    val answer: Boolean = SensitiveDataObj.isMatch(input)(patternList)
+    val answer: Boolean = SensitiveDataObj.isMatch(input, patternList)
     assert(!answer)
   }
 }
 
 
 object SensitiveDataObj extends SensitiveData {
+  override val name: String = "SensitiveDataObj"
   override val patternList: List[Regex] = Nil
   override val contextKeyWords: List[String] = Nil
 
   override def isCheckSum(input: String): Boolean = true
 
-
+  override val isActive: Boolean = true
 }

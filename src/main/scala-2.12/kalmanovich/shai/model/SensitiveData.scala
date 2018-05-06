@@ -10,9 +10,16 @@ trait SensitiveData {
   val patternList : List[Regex]
   val contextKeyWords : List[String]
 
+  val name: String
+
+  val isActive : Boolean
   def isCheckSum(input: String) : Boolean
 
-  def isMatch(input: String)(implicit patternList: List[Regex]) : Boolean = {
+  def isMatch(input: String) : Boolean = {
+    isMatch(input, patternList)
+  }
+
+  def isMatch(input: String, patternList: List[Regex]) : Boolean = {
     patternList.exists((regex: Regex) => {
       val found: Option[String] = regex.findFirstIn(input)
       found match {
