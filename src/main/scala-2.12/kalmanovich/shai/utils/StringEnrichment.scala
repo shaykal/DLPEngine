@@ -19,7 +19,11 @@ object StringEnrichment {
 
 
     def countWordsDistance(indexOfKeywords: Int, indexOfSensitiveDate: Int): Int = {
-      val subString = input.substring(indexOfKeywords, indexOfSensitiveDate)
+      val subString = if(indexOfKeywords < indexOfSensitiveDate){
+        input.substring(indexOfKeywords, indexOfSensitiveDate)
+      } else {
+        input.substring(indexOfSensitiveDate, indexOfKeywords)
+      }
       subString.split(Consts.SPACE).length
     }
 
