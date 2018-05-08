@@ -13,3 +13,5 @@ libraryDependencies ++= Seq(
   //"org.specs2" %% "specs2" % "3.8.9" % Test,
   "org.mockito" % "mockito-core" % "2.10.0" % "test"
 )
+
+mainClass in Compile := Some("kalmanovich.shai.MainApp")
