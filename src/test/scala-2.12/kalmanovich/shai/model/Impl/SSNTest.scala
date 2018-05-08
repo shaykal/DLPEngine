@@ -13,12 +13,12 @@ class SSNTest extends FunSuite {
     val validSSNInput1 = "123456789"
     val validSSNInput2 = "123-45-6789"
     val validSSNInput3 = "123 45 6789"
-    val answer1 = SSN.isMatch(validSSNInput1)
-    val answer2 = SSN.isMatch(validSSNInput2)
-    val answer3 = SSN.isMatch(validSSNInput3)
-    assert(answer1)
-    assert(answer2)
-    assert(answer3)
+    val answer1 = SSN.getSensitiveData(validSSNInput1)
+    val answer2 = SSN.getSensitiveData(validSSNInput2)
+    val answer3 = SSN.getSensitiveData(validSSNInput3)
+    assert(answer1.get == "123456789")
+    assert(answer2.get == "123-45-6789")
+    assert(answer3.get == "123 45 6789")
   }
 
   test("SSN matches false on invalid SSN entry") {
@@ -32,7 +32,7 @@ class SSNTest extends FunSuite {
       """12 34 45 6789"""
     )
 
-    val answer = invalidSSNInputList.forall(invalidInput => !SSN.isMatch(invalidInput))
+    val answer = invalidSSNInputList.forall(invalidInput => SSN.getSensitiveData(invalidInput).isEmpty)
     assert(answer)
   }
 

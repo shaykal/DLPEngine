@@ -11,18 +11,23 @@ object Rules {
 
 
   def applyRuleOnText(aRule: SensitiveData, text: String) : Option[String] = {
-    if (aRule.isMatch(text)) {
+    val sensitiveDataOpt: Option[String] = aRule.getSensitiveData(text)
+
+    sensitiveDataOpt.flatMap(sensitiveDataIn => {
       // found a matching rule. Need to check if it is indeed a violation
-      Some(s"${aRule.name}")
-    } else {
-      None
-    }
+      val indexOfSensitiveData: Int = text.indexOf(sensitiveDataIn)
+      if(aRule.verifySensitiveData(text,indexOfSensitiveData)) {
+        Some(s"Found sensitive data of type ${aRule.name}: $sensitiveDataIn")
+      } else {
+        None
+      }
+    })
   }
 
 
-  def applyAllRulesOnText(rulesList: List[SensitiveData], text: String): List[Option[String]] = {
+  def applyAllRulesOnText(rulesList: List[SensitiveData], text: String): List[String] = {
     rulesList.filter(_.isActive)
-             .map(rule => applyRuleOnText(rule, text))
+             .flatMap(rule => applyRuleOnText(rule, text))
   }
 
 }
