@@ -26,7 +26,6 @@ class StringEnrichmentTest extends FunSuite {
     val inputText: String = "This is an input text"
     val keyWords: List[String] = List("text","input", "blabla")
     val answer = StringEnrichment.StringEnrichmentCls(inputText).getIndexOfKeywordFromInput(keyWords)
-    println(answer)
     assert(answer >= 0)
   }
 
@@ -34,7 +33,6 @@ class StringEnrichmentTest extends FunSuite {
     val inputText: String = "This is an input text"
     val keyWords: List[String] = List("Text","Input", "Blabla")
     val answer = StringEnrichment.StringEnrichmentCls(inputText).getIndexOfKeywordFromInput(keyWords)
-    println(answer)
     assert(answer >= 0)
   }
 

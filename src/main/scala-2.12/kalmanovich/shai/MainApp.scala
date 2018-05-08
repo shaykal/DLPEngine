@@ -31,7 +31,7 @@ object MainApp {
     val source: BufferedSource = io.Source.fromInputStream(getClass.getClassLoader.getResourceAsStream(fileName), "UTF-8")
     try {
       val linesIterator = source.getLines
-      for (line: String <- linesIterator) {
+      for (line: String <- linesIterator) { // TODO use par
         log.debug(s"line is: $line")
         Rules.applyAllRulesOnText(Rules.rulesList, line).foreach(entry => log.info(entry))
       }

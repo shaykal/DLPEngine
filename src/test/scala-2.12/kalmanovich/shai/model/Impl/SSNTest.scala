@@ -7,8 +7,6 @@ import org.scalatest.FunSuite
   */
 class SSNTest extends FunSuite {
 
-  //implicit val ssnPatternList: List[Regex] = SSN.patternList
-
   test("SSN matches true on valid SSN entry") {
     val validSSNInput1 = "123456789"
     val validSSNInput2 = "123-45-6789"
@@ -23,11 +21,9 @@ class SSNTest extends FunSuite {
 
   test("SSN matches false on invalid SSN entry") {
     val invalidSSNInputList = List(
-      //"""1234567890""",
       """12345678""",
       """123-456-6789""",
       """123-456-789""",
-      //"""1234 45 6789""",
       """123 45 67g9""",
       """12 34 45 6789"""
     )

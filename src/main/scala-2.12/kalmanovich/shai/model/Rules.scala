@@ -1,13 +1,13 @@
 package kalmanovich.shai.model
 
-import kalmanovich.shai.model.Impl.SSN
+import kalmanovich.shai.model.Impl.{CreditCard, SSN}
 
 /**
   * Created by Shai Kalmanovich on 5/6/2018.
   */
 object Rules {
 
-  val rulesList : List[SensitiveData] = List(SSN)
+  val rulesList : List[SensitiveData] = List(SSN, CreditCard)
 
 
   def applyRuleOnText(aRule: SensitiveData, text: String) : Option[String] = {
@@ -15,8 +15,7 @@ object Rules {
 
     sensitiveDataOpt.flatMap(sensitiveDataIn => {
       // found a matching rule. Need to check if it is indeed a violation
-      val indexOfSensitiveData: Int = text.indexOf(sensitiveDataIn)
-      if(aRule.verifySensitiveData(text,indexOfSensitiveData)) {
+      if(aRule.verifySensitiveData(text,sensitiveDataIn)) {
         Some(s"Found sensitive data of type ${aRule.name}: $sensitiveDataIn")
       } else {
         None
@@ -29,5 +28,4 @@ object Rules {
     rulesList.filter(_.isActive)
              .flatMap(rule => applyRuleOnText(rule, text))
   }
-
 }

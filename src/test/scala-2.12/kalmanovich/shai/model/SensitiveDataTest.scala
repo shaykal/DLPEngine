@@ -35,13 +35,13 @@ class SensitiveDataTest extends FunSuite {
 
   test("isKeyWords returns true when keywords exist in the correct distance of words") {
     val input: String = "My social security number is 123-45-6789"
-    val answer = SensitiveDataObj.isKeyWords(input, input.length-11, 10)
+    val answer = SensitiveDataObj.isKeyWords(input, SensitiveDataObj.contextKeyWords, input.length-11, 10)
     assert(answer)
   }
 
   test("isKeyWords returns false when keywords exist but distance is too far") {
     val input: String = "My social security number should be 123-45-6789"
-    val answer = SensitiveDataObj.isKeyWords(input, input.length-11, 2)
+    val answer = SensitiveDataObj.isKeyWords(input, SensitiveDataObj.contextKeyWords, input.length-11, 2)
     assert(!answer)
   }
 }

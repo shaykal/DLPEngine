@@ -10,7 +10,7 @@ object StringEnrichment {
     def getIndexOfKeywordFromInput(contextKeyWords: List[String]): Int = {
       val lowerCaseInput = input.toLowerCase
       val answer: Seq[Int] = contextKeyWords.map(keyWord => lowerCaseInput.indexOf(keyWord.toLowerCase))
-        .filter(index => index >= 0)
+                                            .filter(index => index >= 0)
       answer match {
         case Nil => -1
         case _ => answer.head
@@ -20,7 +20,7 @@ object StringEnrichment {
 
     def countWordsDistance(indexOfKeywords: Int, indexOfSensitiveDate: Int): Int = {
       val subString = input.substring(indexOfKeywords, indexOfSensitiveDate)
-      subString.split(Consts.SPACE).size
+      subString.split(Consts.SPACE).length
     }
 
   }

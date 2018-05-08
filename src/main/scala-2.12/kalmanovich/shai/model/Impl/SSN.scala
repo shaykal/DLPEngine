@@ -22,5 +22,4 @@ object SSN extends SensitiveData {
   override def isCheckSum(input: String) =
     true // SSN doesn't have checksum, always return true
 
-
 }
