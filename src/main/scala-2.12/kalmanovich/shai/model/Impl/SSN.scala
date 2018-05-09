@@ -22,4 +22,6 @@ object SSN extends SensitiveData {
   override def isCheckSum(input: String) =
     true // SSN doesn't have checksum, always return true
 
+  override def isKeyWords(input: String, contextKeyWords: List[String], sensitiveData: String, distance: Int): Boolean =
+    isKeyWordsDefaultImpl(input, contextKeyWords, sensitiveData, distance)
 }

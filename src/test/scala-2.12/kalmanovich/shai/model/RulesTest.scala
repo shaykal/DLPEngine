@@ -97,4 +97,7 @@ object SensitiveDataInner extends SensitiveData {
   override val isActive: Boolean = true
 
   override def isCheckSum(input: String): Boolean = true
+
+  override def isKeyWords(input: String, contextKeyWords: List[String], sensitiveData: String, distance: Int): Boolean =
+    isKeyWordsDefaultImpl(input, contextKeyWords, sensitiveData, distance)
 }

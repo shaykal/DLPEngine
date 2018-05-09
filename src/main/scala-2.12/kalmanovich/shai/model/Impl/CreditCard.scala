@@ -40,4 +40,7 @@ object CreditCard extends SensitiveData {
     }
     (sum % 10) == 0
   }
+
+  override def isKeyWords(input: String, contextKeyWords: List[String], sensitiveData: String, distance: Int): Boolean =
+    isKeyWordsDefaultImpl(input, contextKeyWords, sensitiveData, distance)
 }
